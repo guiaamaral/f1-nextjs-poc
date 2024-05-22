@@ -1,0 +1,8 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul {
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+}
