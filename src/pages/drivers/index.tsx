@@ -1,8 +1,8 @@
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import Link from 'next/link'
 import axios from 'axios'
 import DriversList from '@/components/drivers-list'
 import { Positions } from '@/types'
-import Link from 'next/link'
 
 export const getServerSideProps = (async () => {
   const { data: positions } = await axios(`https://ergast.com/api/f1/current/driverStandings.json?limit=50`)
