@@ -15,7 +15,7 @@ export default function DriversPage({ positions }: InferGetServerSidePropsType<t
       <Link
         className='go-back'
         href={'/'}>
-        ❮ Voltar
+        ❮ Go back
       </Link>
       <h2>F1 {positions.MRData.StandingsTable.StandingsLists[0].season} classification</h2>
       <DriversList
