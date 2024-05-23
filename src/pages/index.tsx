@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import axios from 'axios'
 import { differenceInDays } from 'date-fns'
-import { formatInTimeZone } from 'date-fns-tz'
+import NextRace from '@/components/next-race'
 import { RacesSchedule, Race } from '@/types'
 
 export const getServerSideProps = (async () => {
@@ -14,7 +14,7 @@ const thirtyYearsFromNow = ['current']
 const date = new Date()
 const lastYear = date.getFullYear() - 1
 
-for (let i = lastYear; i >= (lastYear - 29); i--) {
+for (let i = lastYear; i >= (lastYear - 34); i--) {
   thirtyYearsFromNow.push(i.toString())
 }
 
@@ -31,23 +31,11 @@ export default function Home({ data }: InferGetServerSidePropsType<typeof getSer
       return [...acc]
     }
   }, [])[0] as Race;
-  const qualifyingDate = new Date(`${nextRace.Qualifying.date} ${nextRace.Qualifying.time}`);
-  const raceDate = new Date(`${nextRace.date} ${nextRace.time}`);
   return (
-    <>
-      <h1>F1</h1>
-      <h2>Next race</h2>
-      <p>
-        <strong>{nextRace.raceName}</strong><br/>
-        {nextRace.Circuit.circuitName}<br/>
-        Location: {nextRace.Circuit.Location.locality} / {nextRace.Circuit.Location.country}
-      </p>
-      <ul>
-        <li>Qualifying: {formatInTimeZone(qualifyingDate, 'America/Sao_Paulo', 'yyyy-MM-dd HH:mm:ss zzz')}</li>
-        <li>Race: {formatInTimeZone(raceDate, 'America/Sao_Paulo', 'yyyy-MM-dd HH:mm:ss zzz')}</li>
-      </ul>
-      <h2>Drivers</h2>
-      <p>Select the year bellow to see the list of drivers</p>
+    <div className='content'>
+      <NextRace nextRace={nextRace} />
+      <h2>Classification</h2>
+      <p>Select the year bellow to see the entire classification</p>
       <nav>
         <ul>
           {thirtyYearsFromNow.map((item: string) => {
@@ -63,6 +51,6 @@ export default function Home({ data }: InferGetServerSidePropsType<typeof getSer
           })}
         </ul>
       </nav>
-    </>
+    </div>
   )
 }

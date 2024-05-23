@@ -43,3 +43,22 @@ export type RacesSchedule = {
         }
     }
 }
+
+export type DriversPosition = {
+    position: string;
+    points: string;
+    Driver: Driver;
+}
+
+export type Positions = {
+    MRData: {
+        StandingsTable: {
+            StandingsLists: [
+                {
+                    season: string;
+                    DriverStandings: DriversPosition[]
+                }
+            ]
+        }
+    }
+}

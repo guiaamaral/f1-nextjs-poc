@@ -1,8 +1,34 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    margin: 0;
 }
 
 nav ul {
     display: grid;
     grid-template-columns: 32% 32% 32%;
+}
+
+h2 {
+    border-bottom: 1px solid #666;
+    padding-left: 4px;
+}
+
+.navbar {
+    background: #e10600;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    padding: 0 16px 16px;
+}
+
+.go-back {
+    font-size: 12px;
+    position: relative;
+    top: 8px;
+    left: 6px;
 }

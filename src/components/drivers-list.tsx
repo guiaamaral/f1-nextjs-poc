@@ -1,16 +1,20 @@
-import { Driver } from "@/types"
+import { DriversPosition } from "@/types"
 
 export default function DriversList(props: {
-  drivers: Driver[]
+  positions: DriversPosition[]
 }) {
   return(
-    <ul>
-      {props.drivers
-        .sort((a: any, b: any) => (a.givenName > b.givenName) ? 1 : ((b.givenName > a.givenName) ? -1 : 0))
-        .map((driver: Driver) => {
-          return <li key={driver.driverId}>{driver.permanentNumber ? `#${driver.permanentNumber}`: ''} {driver.givenName} {driver.familyName}</li>
+    <ol>
+      {props.positions
+        .map((driver: DriversPosition) => {
+          return <li
+            key={driver.position}>
+              {driver.Driver.givenName} {driver.Driver.familyName}
+              {driver.Driver.permanentNumber ? ` (#${driver.Driver.permanentNumber}) `: ' '}
+              - {driver.points} points
+            </li>
         })
       }
-    </ul>
+    </ol>
   )
 }

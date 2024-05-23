@@ -1,18 +1,26 @@
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import axios from 'axios'
 import DriversList from '@/components/drivers-list'
-import { Drivers } from '@/types'
+import { Positions } from '@/types'
+import Link from 'next/link'
 
 export const getServerSideProps = (async () => {
-  const { data } = await axios(`http://ergast.com/api/f1/current/drivers.json?limit=50`)
-  return { props: { data } }
-}) satisfies GetServerSideProps<{ data: Drivers }>
+  const { data: positions } = await axios(`https://ergast.com/api/f1/current/driverStandings.json?limit=50`)
+  return { props: { positions } }
+}) satisfies GetServerSideProps<{ positions: Positions }>
 
-export default function DriversPage({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function DriversPage({ positions }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return(
-    <main>
-      <h1>F1 {data.MRData.DriverTable.season} drivers</h1>
-      <DriversList drivers={data.MRData.DriverTable.Drivers} />
+    <main className='content'>
+      <Link
+        className='go-back'
+        href={'/'}>
+        ❮ Voltar
+      </Link>
+      <h2>F1 {positions.MRData.StandingsTable.StandingsLists[0].season} actual classification</h2>
+      <DriversList
+        positions={positions.MRData.StandingsTable.StandingsLists[0].DriverStandings}
+      />
     </main>
   )
 }
